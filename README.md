@@ -14,3 +14,5 @@ npm start -- lcd=https://lcd.terra.dev log=prod output=./unsigned.json
 ```
 
 It requires active lcd url to get reward information.
+
+It will make unsigned transaction output file (default `./unsignedTx.json`)
