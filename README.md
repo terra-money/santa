@@ -7,9 +7,9 @@ This repository is built to distribute all foundation rewards to validator and d
 ```
 npm run build
 npm start
-
+```
 or
-
+```
 npm start -- lcd=https://lcd.terra.dev log=prod output=./unsigned.json
 ```
 
