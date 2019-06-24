@@ -15,7 +15,7 @@ const outputPath = argv['output'] || "./unsignedTx.json";
 const logLevel = argv['log'] || 'debug';
 console.log(`lcd path: ${lcdURL}`);
 console.log(`output file path: ${outputPath}`);
-console.log(`\n\n`);
+console.log(`\n`);
 const rest = new rest_1.default(lcdURL);
 const foundationAddress = "terra1dp0taj85ruc299rkdvzp4z5pfg6z6swaed74e6";
 const goliathValAddress = "terravaloper163phlen6dn7sp9khhjar2gqqx6kga0ly8d7h9g";
@@ -100,7 +100,7 @@ async function main() {
     const foundationRewards = await loadFoundationRewards();
     if (logLevel == 'debug') {
         console.debug(`Foundation Rewards:`, foundationRewards);
-        console.debug(`\n\n`);
+        console.debug(`\n`);
     }
     const validators = await rest.loadValidators();
     if (!validators) {
@@ -111,12 +111,12 @@ async function main() {
     computeValidatorsRewardRatio(rewardRatioMap, validators);
     if (logLevel == 'debug') {
         console.debug(`Validator Bonus Rewards:`, rewardRatioMap);
-        console.debug(`\n\n`);
+        console.debug(`\n`);
     }
     await computeDelegatorRewardRatio(rewardRatioMap, validators);
     if (logLevel == 'debug') {
         console.debug(`Total Rewards:`, rewardRatioMap);
-        console.debug(`\n\n`);
+        console.debug(`\n`);
     }
     // Rotate reward ratio and build msg input
     let totalRatio = big_js_1.default(0);
