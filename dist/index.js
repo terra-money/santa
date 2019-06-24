@@ -4,8 +4,19 @@ const core = require("@terra-money/core");
 const rest_1 = require("./utils/rest");
 const big_js_1 = require("big.js");
 const fs = require("fs");
-const rest = new rest_1.default("http://127.0.0.1:1317");
-const outputFile = "./unsignedTx.json";
+process.argv = process.argv.slice(2);
+const argv = {};
+for (let i in process.argv) {
+    const tmp = process.argv[i].split('=');
+    argv[tmp[0]] = tmp[1];
+}
+const lcdURL = argv['lcd'] || "http://127.0.0.1:1317";
+const outputPath = argv['output'] || "./unsignedTx.json";
+const logLevel = argv['log'] || 'debug';
+console.log(`lcd path: ${lcdURL}`);
+console.log(`output file path: ${outputPath}`);
+console.log(`\n\n`);
+const rest = new rest_1.default(lcdURL);
 const foundationAddress = "terra1dp0taj85ruc299rkdvzp4z5pfg6z6swaed74e6";
 const goliathValAddress = "terravaloper163phlen6dn7sp9khhjar2gqqx6kga0ly8d7h9g";
 const marineValAddress = "terravaloper1d3hatwcsvkktgwp3elglw9glca0h42yg6xy4lp";
@@ -87,7 +98,10 @@ async function computeDelegatorRewardRatio(rewardRatioMap, validators) {
 }
 async function main() {
     const foundationRewards = await loadFoundationRewards();
-    console.debug("Foundation Rewards:", foundationRewards);
+    if (logLevel == 'debug') {
+        console.debug(`Foundation Rewards:`, foundationRewards);
+        console.debug(`\n\n`);
+    }
     const validators = await rest.loadValidators();
     if (!validators) {
         console.error("no validator found");
@@ -95,9 +109,15 @@ async function main() {
     }
     const rewardRatioMap = {};
     computeValidatorsRewardRatio(rewardRatioMap, validators);
-    console.info("Validator Bonus Rewards: ", rewardRatioMap);
+    if (logLevel == 'debug') {
+        console.debug(`Validator Bonus Rewards:`, rewardRatioMap);
+        console.debug(`\n\n`);
+    }
     await computeDelegatorRewardRatio(rewardRatioMap, validators);
-    console.info("Total Rewards: ", rewardRatioMap);
+    if (logLevel == 'debug') {
+        console.debug(`Total Rewards:`, rewardRatioMap);
+        console.debug(`\n\n`);
+    }
     // Rotate reward ratio and build msg input
     let totalRatio = big_js_1.default(0);
     const outputs = [];
@@ -137,12 +157,13 @@ async function main() {
                 denom: "ukrw",
                 amount: "1000000"
             }] }, "reward distribution");
-    fs.writeFile(outputFile, JSON.stringify(unSingedTx, null, 4), function (err) {
+    fs.writeFile(outputPath, JSON.stringify(unSingedTx, null, 4), function (err) {
         if (err) {
             console.error("Writing Failed", err);
+            return process.exit(-1);
         }
         else {
-            console.info("Writing Succeed", `Please check ${outputFile}`);
+            console.info("Writing Succeed", `Please check ${outputPath}`);
         }
     });
     return;
