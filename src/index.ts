@@ -184,12 +184,16 @@ async function main() {
 
     const coins: Array<core.Coin> = []
     for (let i in foundationRewards) {
+      const amount = bn(foundationRewards[i].amount).mul(ratio)
+      if (amount.lt(1)) continue // smaller than 1 will be 0, so just skip it
+
       coins.push({
         denom: foundationRewards[i].denom,
-        amount: bn(foundationRewards[i].amount).mul(ratio).toFixed(0)
+        amount: amount.toFixed(1).split(".")[0] // truncate decimal
       })
     }
 
+    if (coins.length == 0) continue
     outputs.push({
       address: addr,
       coins: coins
@@ -211,7 +215,7 @@ async function main() {
   for (let i in foundationRewards) {
     coins.push({
       denom: foundationRewards[i].denom,
-      amount: bn(foundationRewards[i].amount).toFixed(0)
+      amount: bn(foundationRewards[i].amount).toFixed(1).split(".")[0] // truncate decimal
     })
   }
 

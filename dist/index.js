@@ -158,11 +158,16 @@ async function main() {
         totalRatio = totalRatio.plus(ratio);
         const coins = [];
         for (let i in foundationRewards) {
+            const amount = big_js_1.default(foundationRewards[i].amount).mul(ratio);
+            if (amount.lt(1))
+                continue; // smaller than 1 will be 0, so just skip it
             coins.push({
                 denom: foundationRewards[i].denom,
-                amount: big_js_1.default(foundationRewards[i].amount).mul(ratio).toFixed(0)
+                amount: amount.toFixed(1).split(".")[0] // truncate decimal
             });
         }
+        if (coins.length == 0)
+            continue;
         outputs.push({
             address: addr,
             coins: coins
@@ -181,7 +186,7 @@ async function main() {
     for (let i in foundationRewards) {
         coins.push({
             denom: foundationRewards[i].denom,
-            amount: big_js_1.default(foundationRewards[i].amount).toFixed(0)
+            amount: big_js_1.default(foundationRewards[i].amount).toFixed(1).split(".")[0] // truncate decimal
         });
     }
     inputs.push({
