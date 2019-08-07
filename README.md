@@ -1,35 +1,54 @@
-# Reward Distributor
-TERRA Foundation Reward Distributor
-
-This repository is built to distribute all foundation rewards to validator and delegators on terra network.
-
-## Usage
+# Build & Install
 ```
-npm run build
-npm start
-```
-or
-```
-npm start -- lcd=https://lcd.terra.dev log=prod output=./unsigned.json
+$ git clone https://github.com/terra-project/feegiver.git
+$ git checkout master
 ```
 
-It requires active lcd url to get reward information.
-
-It will make unsigned transaction output file (default `./unsignedTx.json`)
-
-
-## Instructions
-### For Both
+## Install
 ```
-terracli tx distr set-withdraw-addr --withdraw-to terra1437zllxmq9gag8acyt56rk7dkyrd2zvk9ts02p --from {both} --chain-id columbus-2 --gas-prices 0.015uluna --gas 18000
+$ make install
 ```
-
-### For Foundation Validator
+## make config
 ```
-terracli tx distr withdraw-rewards --validator {validator} --from {validator} --commission
+$ feegiver config
+```
+## change config
+```
+$ vim ~/.feegiver/config.yaml
 ```
 
-### For Foundation Delegator
+## Add Key
 ```
-terracli tx distr terracli tx distr withdraw-all-rewards --from {validator} 
+$ feegiver keys add yun                        
+Enter a passphrase to encrypt your key to disk:
+Repeat the passphrase:
+{"name":"yun","type":"local","address":"terra1a26sc2vqs20hfx239kejhd88v6cl87yfswvk0t","pubkey":"terrapub1addwnpepqwspkmsl724h9azfvgqgs8jkyuyyr3d6eme432afvlvulk3al0mwwnxwlxv","mnemonic":"decade urge pond sustain unit film milk sunny wash accuse profit staff what black problem treat velvet metal leg review math history juice soccer"}
+```
+
+## Recover Key
+```
+$ feegiver keys add yun --recover
+Enter a passphrase to encrypt your key to disk:
+Repeat the passphrase:
+> Enter your bip39 mnemonic
+theory fat merge under hungry utility toss much trend turkey degree glare bread connect trend grain silk toe pupil crouch innocent pause zero shove
+
+{"name":"yun","type":"local","address":"terra1gn37dh0jl4zu4fp48d8y4c0hqs9cel83x7st7v","pubkey":"terrapub1addwnpepqfukqlgu8chxwwqns6adgjxvfny6y6tcvqmqkkn2xk6e6kefdaggvh4j7f0","mnemonic":"spatial fantasy weekend romance entire million celery final moon solid route theory way hockey north trigger advice balcony melody fabric alter bullet twice push"}
+```
+
+## Add Key with Old HD Path
+```
+$ feegiver keys add yun --recover --old-hd-path 
+Enter a passphrase to encrypt your key to disk:
+Repeat the passphrase:
+> Enter your bip39 mnemonic 
+flash until glimpse chase cradle adjust brick view uncover analyst test pact sponsor example item victory memory attract visual hover pink meadow mosquito torch
+
+{"name":"yun","type":"local","address":"terra1gn37dh0jl4zu4fp48d8y4c0hqs9cel83x7st7v","pubkey":"terrapub1addwnpepqfukqlgu8chxwwqns6adgjxvfny6y6tcvqmqkkn2xk6e6kefdaggvh4j7f0","mnemonic":"spatial fantasy weekend romance entire million celery final moon solid route theory way hockey north trigger advice balcony melody fabric alter bullet twice push"}
+```
+
+## Start Server
+```
+$ feegiver start yun              
+Enter the passphrase:
 ```
