@@ -26,6 +26,7 @@ Repeat the passphrase:
 ```
 
 ## Recover Key
+```
 $ feegiver keys add yun --recover
 Enter a passphrase to encrypt your key to disk:
 Repeat the passphrase:
@@ -33,6 +34,7 @@ Repeat the passphrase:
 theory fat merge under hungry utility toss much trend turkey degree glare bread connect trend grain silk toe pupil crouch innocent pause zero shove
 
 {"name":"yun","type":"local","address":"terra1gn37dh0jl4zu4fp48d8y4c0hqs9cel83x7st7v","pubkey":"terrapub1addwnpepqfukqlgu8chxwwqns6adgjxvfny6y6tcvqmqkkn2xk6e6kefdaggvh4j7f0","mnemonic":"spatial fantasy weekend romance entire million celery final moon solid route theory way hockey north trigger advice balcony melody fabric alter bullet twice push"}
+```
 
 ## Add Key with Old HD Path
 ```
