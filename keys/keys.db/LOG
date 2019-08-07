@@ -1,0 +1,54 @@
+=============== Aug 7, 2019 (KST) ===============
+16:56:58.211679 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:56:58.225722 db@open opening
+16:56:58.226696 version@stat F·[] S·0B[] Sc·[]
+16:56:58.232353 db@janitor F·2 G·0
+16:56:58.233004 db@open done T·7.237371ms
+16:56:58.233111 db@close closing
+16:56:58.233208 db@close done T·94.717µs
+=============== Aug 7, 2019 (KST) ===============
+16:56:58.233404 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:56:58.233637 version@stat F·[] S·0B[] Sc·[]
+16:56:58.233664 db@open opening
+16:56:58.233756 journal@recovery F·1
+16:56:58.233897 journal@recovery recovering @1
+16:56:58.234452 version@stat F·[] S·0B[] Sc·[]
+16:56:58.252330 db@janitor F·2 G·0
+16:56:58.252363 db@open done T·18.674729ms
+16:56:58.498076 db@close closing
+16:56:58.498173 db@close done T·92.831µs
+=============== Aug 7, 2019 (KST) ===============
+16:57:24.410988 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:57:24.411185 version@stat F·[] S·0B[] Sc·[]
+16:57:24.411205 db@open opening
+16:57:24.411267 journal@recovery F·1
+16:57:24.411556 journal@recovery recovering @2
+16:57:24.420661 memdb@flush created L0@4 N·2 S·484B "ter..ess,v2":"yun.info,v1"
+16:57:24.421713 version@stat F·[1] S·484B[484B] Sc·[0.25]
+16:57:24.441941 db@janitor F·3 G·0
+16:57:24.447859 db@open done T·36.631766ms
+16:57:24.690607 db@close closing
+16:57:24.691097 db@close done T·486.088µs
+=============== Aug 7, 2019 (KST) ===============
+16:57:32.561788 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:57:32.562041 version@stat F·[1] S·484B[484B] Sc·[0.25]
+16:57:32.562066 db@open opening
+16:57:32.562137 journal@recovery F·1
+16:57:32.562405 journal@recovery recovering @5
+16:57:32.569663 memdb@flush created L0@7 N·2 S·184B "ter..ess,d4":"yun.info,d5"
+16:57:32.570358 version@stat F·[2] S·668B[668B] Sc·[0.50]
+16:57:32.595987 db@janitor F·4 G·0
+16:57:32.596026 db@open done T·33.942315ms
+16:57:32.596181 db@close closing
+16:57:32.596288 db@close done T·102.884µs
+=============== Aug 7, 2019 (KST) ===============
+16:57:32.596436 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+16:57:32.596622 version@stat F·[2] S·668B[668B] Sc·[0.50]
+16:57:32.596642 db@open opening
+16:57:32.596721 journal@recovery F·1
+16:57:32.596980 journal@recovery recovering @8
+16:57:32.599133 version@stat F·[2] S·668B[668B] Sc·[0.50]
+16:57:32.617657 db@janitor F·4 G·0
+16:57:32.617706 db@open done T·21.049788ms
+16:57:32.863658 db@close closing
+16:57:32.864305 db@close done T·642.212µs

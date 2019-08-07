@@ -1,35 +1,32 @@
-# Reward Distributor
-TERRA Foundation Reward Distributor
-
-This repository is built to distribute all foundation rewards to validator and delegators on terra network.
-
-## Usage
+# Build & Install
 ```
-npm run build
-npm start
-```
-or
-```
-npm start -- lcd=https://lcd.terra.dev log=prod output=./unsigned.json
+$ git clone https://github.com/terra-project/feegiver.git
+$ git checkout master
 ```
 
-It requires active lcd url to get reward information.
-
-It will make unsigned transaction output file (default `./unsignedTx.json`)
-
-
-## Instructions
-### For Both
+## Install
 ```
-terracli tx distr set-withdraw-addr --withdraw-to terra1437zllxmq9gag8acyt56rk7dkyrd2zvk9ts02p --from {both} --chain-id columbus-2 --gas-prices 0.015uluna --gas 18000
+$ make install
 ```
-
-### For Foundation Validator
+## make config
 ```
-terracli tx distr withdraw-rewards --validator {validator} --from {validator} --commission
+$ feegiver config
+```
+## change config
+```
+$ vim ~/.feegiver/config.yaml
 ```
 
-### For Foundation Delegator
+## Add Key
 ```
-terracli tx distr terracli tx distr withdraw-all-rewards --from {validator} 
+$ feegiver keys add tmp 12345678 'flash until glimpse chase cradle adjust brick view uncover analyst test pact sponsor example item victory memory attract visual hover pink meadow mosquito torch'
+```
+## Add Key with Old HD Path
+```
+$ feegiver keys add tmp 12345678 'flash until glimpse chase cradle adjust brick view uncover analyst test pact sponsor example item victory memory attract visual hover pink meadow mosquito torch' --old-hd-path
+```
+
+## Start Server
+```
+$ feegiver start tmp 12345678
 ```
