@@ -11,13 +11,13 @@ import (
 	txbldr "github.com/cosmos/cosmos-sdk/x/auth/client/txbuilder"
 	"github.com/cosmos/cosmos-sdk/x/bank"
 
-	"github.com/terra-project/core/app"
+	core "github.com/terra-project/core/app"
 )
 
 var cdc *codec.Codec
 
 func init() {
-	cdc = app.MakeCodec()
+	cdc = core.MakeCodec()
 
 	config := sdk.GetConfig()
 	config.SetCoinType(330)
@@ -28,8 +28,8 @@ func init() {
 	config.Seal()
 }
 
-// Generator tx generator
-type Generator struct {
+// SantaApp tx app
+type SantaApp struct {
 	KeyDir string `json:"key_dir" yaml:"key_dir"`
 	Node   string `json:"node" yaml:"node"`
 
@@ -44,25 +44,24 @@ type Generator struct {
 	Branch  string `yaml:"branch,omitempty"`
 }
 
-// BankSend handles the /tx/bank/send route
-func (g Generator) SendTx(height int64, chainID string) (err error) {
-
-	kb, err := keys.NewKeyBaseFromDir(g.KeyDir)
+// Send BankSend Tx
+func (app SantaApp) SendTx(chainID string) (txHash string, err error) {
+	kb, err := keys.NewKeyBaseFromDir(app.KeyDir)
 	if err != nil {
 		return
 	}
 
-	info, err := kb.Get(g.KeyName)
+	info, err := kb.Get(app.KeyName)
 	if err != nil {
 		return
 	}
 
-	acc, err := g.QueryAccount(cdc, info.GetAddress())
+	acc, err := app.QueryAccount(cdc, info.GetAddress())
 	if err != nil {
 		return
 	}
 
-	targetFeeCoin, err := sdk.ParseCoin(g.FeeAmount)
+	targetFeeCoin, err := sdk.ParseCoin(app.FeeAmount)
 	if err != nil {
 		return
 	}
@@ -87,16 +86,15 @@ func (g Generator) SendTx(height int64, chainID string) (err error) {
 		"",
 	)
 
-	signedTx, err := g.signTx(stdTx, acc, chainID)
+	signedTx, err := app.signTx(stdTx, acc, chainID)
 
-	txHash, err := g.BroadcastTx(signedTx)
-	fmt.Println(txHash)
-	return nil
+	txHash, err = app.BroadcastTx(signedTx)
+	return
 }
 
-func (g Generator) signTx(stdTx auth.StdTx, acc auth.Account, chainID string) (signedTx auth.StdTx, err error) {
+func (app SantaApp) signTx(stdTx auth.StdTx, acc auth.Account, chainID string) (signedTx auth.StdTx, err error) {
 
-	kb, err := keys.NewKeyBaseFromDir(g.KeyDir)
+	kb, err := keys.NewKeyBaseFromDir(app.KeyDir)
 	if err != nil {
 		return
 	}
@@ -113,7 +111,7 @@ func (g Generator) signTx(stdTx auth.StdTx, acc auth.Account, chainID string) (s
 		},
 	}
 
-	sigBytes, pubkey, err := kb.Sign(g.KeyName, g.KeyPassword, sdk.MustSortJSON(cdc.MustMarshalJSON(stdSign)))
+	sigBytes, pubkey, err := kb.Sign(app.KeyName, app.KeyPassword, sdk.MustSortJSON(cdc.MustMarshalJSON(stdSign)))
 	if err != nil {
 		return
 	}

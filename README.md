@@ -1,54 +1,87 @@
-# Build & Install
+# Santa 
+
+![banner](./banner.png)
+
+[![codecov](https://codecov.io/gh/terra-project/santa/branch/master/graph/badge.svg)](https://codecov.io/gh/terra-project/santa)
+
+Santa subsidizes block rewards for Terra's Columbus mainnet. It is intended to support the security of the network until Terra transaction volume (and attendent staking returns from transaction fees) has had sufficient time to mature. Read [here](./MOTIVATION.md) for more details on the project motivation. 
+
+
+## Mechanism
+
+The config file looks something like the following: 
 ```
-$ git clone https://github.com/terra-project/feegiver.git
+key_dir: ...
+node: ...
+trigger_interval: 1 
+fee_amount: 1000000uluna 
+```
+
+Every `trigger_interval` number of blocks on Columbus, Santa sends a transaction containing `1 uluna` with `fee_amount` of fees to itself. Effectively, this scheme allows Santa to subsidize block rewards by paying fees over periodic block intervals. 
+
+For example, in order to subsidize 21.6 million Luna tokens every block over 1 year, one needs to set `trigger_interval` to 1, and `fee_amount` to `21.6 million / (3.154e+7 / 6.5) * 10^6 = 4451490 uluna`. 
+
+## Status
+
+An instance of Santa is currently being jointly operated and supported by several top validators in the network:
+
+```
+Hashed
+Arrington XRP Capital
+Polychain Labs 
+Certus One
+Chorus One
+Terraform Labs
+B Harvest 
+A Team
+Dokia Capital
+Terraforming
+Healings 
+```
+
+To kick off the process, Terraform Labs has donated 21.6 million tokens to be distributed over the course of the next year, slightly above a 10% annualized return on currently staked tokens. You can see Santa hard at work here: https://finder.terra.money/columbus-2/account/terra13u66u4knssnws7n7w0n38mzyyqak5ygp807gyl
+
+Some details on future operations: 
+- **IMPORTANT**: Santa will operate independently of existing rewards from fees and swaps. As Terra transaction volume goes up, expected rewards may well be significantly higher than that provided by Santa.  
+- Every time the number of staked tokens go up by more than 10 million tokens, Terraform Labs is commiting to deposit an additional 1 million Luna to Santa to prevent reward dilution for existing stakeholders. No tokens will be withdrawn in the opposite case where the number of staked tokens go down. 
+- Terra's validator community will actively monitor the network's reward dynamics and continue supporting Santa in the unlikely case that staking returns continue to lag behind the industry average. The Terraform Labs validator will commit up to 100 million Luna tokens for this purpose, which, at current parameters, sufficient to keep Santa running for the next five years. 
+- Members of the community looking to support the network are either encouraged to either donate tokens to the [currently active Santa address](https://finder.terra.money/columbus-2/account/terra13u66u4knssnws7n7w0n38mzyyqak5ygp807gyl) or start their own instances of Santa. 
+
+## Build & Install
+
+First, check out the repo: 
+
+```
+$ git clone https://github.com/terra-project/santa.git
 $ git checkout master
 ```
 
-## Install
+Then, build and install: 
 ```
 $ make install
 ```
-## make config
+
+To initialize the config file for Santa:
 ```
-$ feegiver config
-```
-## change config
-```
-$ vim ~/.feegiver/config.yaml
+$ santa config
 ```
 
-## Add Key
+To edit the config file: 
 ```
-$ feegiver keys add yun                        
-Enter a passphrase to encrypt your key to disk:
-Repeat the passphrase:
-{"name":"yun","type":"local","address":"terra1a26sc2vqs20hfx239kejhd88v6cl87yfswvk0t","pubkey":"terrapub1addwnpepqwspkmsl724h9azfvgqgs8jkyuyyr3d6eme432afvlvulk3al0mwwnxwlxv","mnemonic":"decade urge pond sustain unit film milk sunny wash accuse profit staff what black problem treat velvet metal leg review math history juice soccer"}
+$ vim ~/.santa/config.yaml
 ```
 
-## Recover Key
+To add a key to an account containing tokens to be doled out: 
 ```
-$ feegiver keys add yun --recover
-Enter a passphrase to encrypt your key to disk:
-Repeat the passphrase:
-> Enter your bip39 mnemonic
-theory fat merge under hungry utility toss much trend turkey degree glare bread connect trend grain silk toe pupil crouch innocent pause zero shove
-
-{"name":"yun","type":"local","address":"terra1gn37dh0jl4zu4fp48d8y4c0hqs9cel83x7st7v","pubkey":"terrapub1addwnpepqfukqlgu8chxwwqns6adgjxvfny6y6tcvqmqkkn2xk6e6kefdaggvh4j7f0","mnemonic":"spatial fantasy weekend romance entire million celery final moon solid route theory way hockey north trigger advice balcony melody fabric alter bullet twice push"}
+$ santa keys add         
 ```
 
-## Add Key with Old HD Path
+To recover a key: 
 ```
-$ feegiver keys add yun --recover --old-hd-path 
-Enter a passphrase to encrypt your key to disk:
-Repeat the passphrase:
-> Enter your bip39 mnemonic 
-flash until glimpse chase cradle adjust brick view uncover analyst test pact sponsor example item victory memory attract visual hover pink meadow mosquito torch
-
-{"name":"yun","type":"local","address":"terra1gn37dh0jl4zu4fp48d8y4c0hqs9cel83x7st7v","pubkey":"terrapub1addwnpepqfukqlgu8chxwwqns6adgjxvfny6y6tcvqmqkkn2xk6e6kefdaggvh4j7f0","mnemonic":"spatial fantasy weekend romance entire million celery final moon solid route theory way hockey north trigger advice balcony melody fabric alter bullet twice push"}
+$ santa keys add  --recover
 ```
 
-## Start Server
+Finally: to start santa and have Christmas come early: 
 ```
-$ feegiver start yun              
-Enter the passphrase:
+$ santa start      
 ```

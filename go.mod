@@ -1,4 +1,4 @@
-module github.com/terra-project/feegiver
+module github.com/terra-project/santa
 
 go 1.12
 

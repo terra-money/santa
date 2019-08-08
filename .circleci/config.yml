@@ -1,0 +1,24 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.11
+    steps:
+      - checkout
+      - run: 
+          name: install
+          command: make install
+      - run: 
+          name: codecov report
+          command: |
+            go test -timeout 3600s ./utils/... -coverprofile=coverage.txt
+      - run:
+          name: upload
+          command: bash <(curl -s https://codecov.io/bash) -f coverage.txt
+
+workflows:
+  version: 2
+  test-suite:
+    jobs:
+      - build

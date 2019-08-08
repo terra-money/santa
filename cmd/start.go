@@ -24,24 +24,22 @@ var startCmd = &cobra.Command{
 			return
 		}
 
-		generator.KeyName = args[0]
-		generator.KeyPassword = password
+		app.KeyName = args[0]
+		app.KeyPassword = password
 
-		kb, err := keys.NewKeyBaseFromDir(generator.KeyDir)
+		kb, err := keys.NewKeyBaseFromDir(app.KeyDir)
 		if err != nil {
 			log.Fatalf("failed to open keybase: %s", err.Error())
 			return
 		}
 
-		_, err = kb.Get(generator.KeyName)
+		_, err = kb.Get(app.KeyName)
 		if err != nil {
 			log.Fatalf("failed to get account: %s", err.Error())
 			return
 		}
 
-		generator.ListenNewBLock()
-		// err := generator.SendTx(10000, "vodka")
-		// fmt.Println(err)
+		app.ListenNewBLock(false)
 	},
 }
 
