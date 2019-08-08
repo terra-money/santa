@@ -6,7 +6,7 @@ import (
 
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
-	"github.com/terra-project/feegiver/utils"
+	"github.com/terra-project/santa/utils"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -21,8 +21,8 @@ var configCmd = &cobra.Command{
 			return
 		}
 
-		g := utils.Generator{
-			KeyDir: fmt.Sprintf("%s/.feegiver", home),
+		g := utils.SantaApp{
+			KeyDir: fmt.Sprintf("%s/.santa", home),
 			Node:   "http://localhost:26657",
 
 			TriggerInterval: "5",

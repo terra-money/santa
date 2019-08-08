@@ -1,4 +1,4 @@
-BINARY            = feegiver
+BINARY            = santa
 GITHUB_USERNAME   = terra-project
 VERSION           = v0.1.0
 GOARCH            = amd64

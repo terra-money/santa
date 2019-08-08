@@ -14,7 +14,7 @@
 
 package main
 
-import "github.com/terra-project/feegiver/cmd"
+import "github.com/terra-project/santa/cmd"
 
 func main() {
 	cmd.Execute()
