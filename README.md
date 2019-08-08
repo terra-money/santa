@@ -1,6 +1,6 @@
 # Santa 
 
-![banner](docs/terra-core.png)
+![banner](./banner.png)
 
 Santa subsidizes block rewards for Terra's Columbus mainnet. It is intended to support the security of the network until Terra transaction volume (and attendent staking returns from transaction fees) has had sufficient time to mature. Read [here](./MOTIVATION.md) for more details on the project motivation. 
 
