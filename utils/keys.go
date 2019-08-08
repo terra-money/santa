@@ -11,9 +11,9 @@ import (
 )
 
 // GetKeys returns key list
-func (g Generator) GetKeys() (out []byte, err error) {
+func (app SantaApp) GetKeys() (out []byte, err error) {
 
-	kb, err := keys.NewKeyBaseFromDir(g.KeyDir)
+	kb, err := keys.NewKeyBaseFromDir(app.KeyDir)
 	if err != nil {
 		return nil, err
 	}
@@ -36,8 +36,8 @@ func (g Generator) GetKeys() (out []byte, err error) {
 }
 
 // AddNewKey appends new key
-func (g Generator) AddNewKey(name, password, mnemonic string, oldHdPath bool) (out []byte, err error) {
-	kb, err := keys.NewKeyBaseFromDir(g.KeyDir)
+func (app SantaApp) AddNewKey(name, password, mnemonic string, oldHdPath bool) (out []byte, err error) {
+	kb, err := keys.NewKeyBaseFromDir(app.KeyDir)
 	if err != nil {
 		return
 	}
@@ -93,8 +93,8 @@ func (g Generator) AddNewKey(name, password, mnemonic string, oldHdPath bool) (o
 }
 
 // GetKey is the handler for the GET /keys/{name}
-func (g Generator) GetKey(name, bechPrefix string) (out []byte, err error) {
-	kb, err := keys.NewKeyBaseFromDir(g.KeyDir)
+func (app SantaApp) GetKey(name, bechPrefix string) (out []byte, err error) {
+	kb, err := keys.NewKeyBaseFromDir(app.KeyDir)
 	if err != nil {
 		return
 	}
@@ -142,9 +142,13 @@ func getBechKeyOut(bechPrefix string) (bechKeyOutFn, error) {
 }
 
 // UpdateKey update key password
-func (g Generator) UpdateKey(name, newPassword, oldPassword string) (err error) {
+func (app SantaApp) UpdateKey(name, oldPassword, newPassword string) (err error) {
+	if name == "" || oldPassword == "" || newPassword == "" {
+		err = fmt.Errorf("must include name, oldPassword, and newPassword with request")
+		return
+	}
 
-	kb, err := keys.NewKeyBaseFromDir(g.KeyDir)
+	kb, err := keys.NewKeyBaseFromDir(app.KeyDir)
 	if err != nil {
 		return
 	}
@@ -158,8 +162,8 @@ func (g Generator) UpdateKey(name, newPassword, oldPassword string) (err error) 
 }
 
 // DeleteKey is the handler for the DELETE /keys/{name}
-func (g Generator) DeleteKey(name, password string) (err error) {
-	kb, err := keys.NewKeyBaseFromDir(g.KeyDir)
+func (app SantaApp) DeleteKey(name, password string) (err error) {
+	kb, err := keys.NewKeyBaseFromDir(app.KeyDir)
 	if err != nil {
 		return
 	}

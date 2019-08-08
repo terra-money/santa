@@ -29,7 +29,7 @@ var keysList = &cobra.Command{
 	Use:   "list",
 	Short: "Fetch all keys managed by the server",
 	Run: func(cmd *cobra.Command, args []string) {
-		out, err := generator.GetKeys()
+		out, err := app.GetKeys()
 		if err != nil {
 			log.Fatalf("Failed: %s", err.Error())
 			return
@@ -76,7 +76,7 @@ var keysAdd = &cobra.Command{
 			return
 		}
 
-		out, err := generator.AddNewKey(args[0], password, mnemonic, oldHdPath)
+		out, err := app.AddNewKey(args[0], password, mnemonic, oldHdPath)
 
 		if err != nil {
 			log.Fatalf("Failed: %s", err.Error())
@@ -92,7 +92,7 @@ var keyShow = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Short: "Fetch details for one key",
 	Run: func(cmd *cobra.Command, args []string) {
-		out, err := generator.GetKey(args[0], viper.GetString(flagBech))
+		out, err := app.GetKey(args[0], viper.GetString(flagBech))
 
 		if err != nil {
 			log.Fatalf("Failed: %s", err.Error())
@@ -123,7 +123,7 @@ var keyPut = &cobra.Command{
 			log.Fatalf("failed reading new password: %s", err.Error())
 			return
 		}
-		err = generator.UpdateKey(args[0], password, newPassword)
+		err = app.UpdateKey(args[0], password, newPassword)
 		if err != nil {
 			log.Fatalf("Failed: %s", err.Error())
 			return
@@ -145,7 +145,7 @@ var keyDelete = &cobra.Command{
 			return
 		}
 
-		err = generator.DeleteKey(args[0], password)
+		err = app.DeleteKey(args[0], password)
 		if err != nil {
 			log.Fatalf("Failed: %s", err.Error())
 			return

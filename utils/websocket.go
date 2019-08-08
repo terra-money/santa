@@ -21,21 +21,20 @@ func init() {
 }
 
 // ListenNewBlock listen new block and trigger sendtx
-func (g Generator) ListenNewBLock() {
-
-	triggerInterval, err := strconv.ParseInt(g.TriggerInterval, 10, 64)
+func (app SantaApp) ListenNewBLock(isTest bool) {
+	triggerInterval, err := strconv.ParseInt(app.TriggerInterval, 10, 64)
 	if err != nil {
 		log.Fatal("Trigger interval should be number", err)
 	}
 
 	var scheme string
 	var host string
-	if strings.HasPrefix(g.Node, "https") {
+	if strings.HasPrefix(app.Node, "https") {
 		scheme = "wss"
-		host = strings.TrimPrefix(g.Node, "https://")
+		host = strings.TrimPrefix(app.Node, "https://")
 	} else {
 		scheme = "ws"
-		host = strings.TrimPrefix(g.Node, "http://")
+		host = strings.TrimPrefix(app.Node, "http://")
 	}
 
 	u := url.URL{Scheme: scheme, Host: host, Path: "/websocket"}
@@ -76,14 +75,18 @@ func (g Generator) ListenNewBLock() {
 		}
 
 		if blockEvent.Block.Height%triggerInterval == 0 {
-			err := g.SendTx(blockEvent.Block.Height, blockEvent.Block.ChainID)
+			txHash, err := app.SendTx(blockEvent.Block.ChainID)
 			if err != nil {
-				log.Fatal("Failed to send tx", err)
+				log.Fatal("[Fail] to send tx", err)
 			}
+
+			log.Printf("[Success] Height: %d,\tTxHash: %s\n", blockEvent.Block.Height, txHash)
 		}
 
+		if isTest {
+			break
+		}
 	}
-
 }
 
 // no-lint
