@@ -32,3 +32,5 @@ Santa Validators,
 - StakeWith.Us
 - Terraforming
 - Wraith
+- 100&100 Venture Capital
+
