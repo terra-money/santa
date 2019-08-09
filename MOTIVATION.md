@@ -34,5 +34,6 @@ Santa Validators,
 - Staking Fund
 - Terraforming
 - Wraith
+- 01node
 - 100&100 Venture Capital
 
