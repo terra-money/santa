@@ -33,6 +33,7 @@ Certus One
 ChainLayer
 Chorus One
 Dokia Capital
+Easy 2 Stake
 Figment Network
 Ghost
 Goliath
