@@ -30,6 +30,7 @@ Santa Validators,
 - Polychain Labs
 - RockX
 - StakeWith.Us
+- Staking Fund
 - Terraforming
 - Wraith
 - 100&100 Venture Capital
