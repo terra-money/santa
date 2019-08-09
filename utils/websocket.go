@@ -1,8 +1,11 @@
 package utils
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 	"log"
+	"net/http"
 	"net/url"
 	"os"
 	"strconv"
@@ -80,6 +83,21 @@ func (app SantaApp) ListenNewBLock(isTest bool) {
 			txHash, err := app.SendTx(blockEvent.Block.ChainID)
 			if err != nil {
 				log.Printf("[Fail] to send tx: %s", err.Error())
+
+				if app.WebHookURL != "" && app.WebHookDataKey != "" {
+					notiBody, err := json.Marshal(map[string]string{
+						app.WebHookDataKey: fmt.Sprintf("[Fail] sending tx: %s", err.Error()),
+					})
+
+					if err != nil {
+						continue
+					}
+
+					// send notification to slack
+					http.Post(app.WebHookURL, "application/json", bytes.NewBuffer(notiBody))
+					continue
+				}
+
 			}
 
 			log.Printf("[Success] Height: %d,\tTxHash: %s\n", blockEvent.Block.Height, txHash)
