@@ -51,7 +51,7 @@ To kick off the process, the Goliath, Marine, Wraith and Ghost Validators have d
 Some details on future operations: 
 - **IMPORTANT**: Santa will operate independently of existing rewards from fees and swaps. As Terra transaction volume goes up, expected rewards may well be significantly higher than that provided by Santa.  
 - Every time the number of staked tokens go up by more than 10 million tokens, the Goliath, Marine, Wraith and Ghost Validators are commiting to deposit an additional 1 million Luna to Santa to prevent reward dilution for existing stakeholders. No tokens will be withdrawn in the opposite case where the number of staked tokens go down. 
-- Terra's validator community will actively monitor the network's reward dynamics and continue supporting Santa in the unlikely case that staking returns continue to lag behind the industry average. The Terraform Labs validator will commit up to 100 million Luna tokens for this purpose, which, at current parameters, sufficient to keep Santa running for the next five years. 
+- Terra's validator community will actively monitor the network's reward dynamics and continue supporting Santa in the unlikely case that staking returns continue to lag behind the industry average. The Goliath, Marine, Wraith and Ghost Validators will commit up to 100 million Luna tokens for this purpose, which, at current parameters, sufficient to keep Santa running for the next five years. 
 - Members of the community looking to support the network are either encouraged to either donate tokens to the [currently active Santa address](https://finder.terra.money/columbus-2/account/terra13u66u4knssnws7n7w0n38mzyyqak5ygp807gyl) or start their own instances of Santa. 
 
 ## Build & Install
