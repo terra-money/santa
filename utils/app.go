@@ -39,6 +39,9 @@ type SantaApp struct {
 	TriggerInterval string `json:"trigger_interval" yaml:"trigger_interval"`
 	FeeAmount       string `json:"fee_amount" yaml:"fee_amount"`
 
+	WebHookURL     string `json:"webhook_url" yaml:"webhook_url"`
+	WebHookDataKey string `json:"webhook_data_key" yaml:"webhook_data_key"`
+
 	Version string `yaml:"version,omitempty"`
 	Commit  string `yaml:"commit,omitempty"`
 	Branch  string `yaml:"branch,omitempty"`
