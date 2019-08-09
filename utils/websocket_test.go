@@ -1,15 +1,17 @@
 package utils
 
 import (
-	"os"
 	"bytes"
 	"log"
+	"os"
 	"strings"
 	"time"
 
 	"testing"
+
 	"github.com/stretchr/testify/require"
 )
+
 func TestWebsocketListen(t *testing.T) {
 	app := setupWithPlentyBalanceAccount(t)
 
@@ -18,11 +20,11 @@ func TestWebsocketListen(t *testing.T) {
 
 	var logBuf bytes.Buffer
 	log.SetOutput(&logBuf)
-	defer log.SetOutput(os.Stderr)
+	defer log.SetOutput(os.Stdout)
 
 	app.TriggerInterval = "1"
 	app.ListenNewBLock(true)
-	
+
 	result := logBuf.String()
 	require.True(t, strings.Contains(result, "[Success]"))
 }
