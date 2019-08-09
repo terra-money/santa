@@ -30,6 +30,7 @@ A-Team
 Arrington XRP Capital
 B-Harvest
 Certus One
+ChainLayer
 Chorus One
 Dokia Capital
 Figment Network
