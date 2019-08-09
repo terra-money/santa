@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/url"
+	"os"
 	"strconv"
 	"strings"
 
@@ -17,6 +18,7 @@ import (
 var aminoCdc = amino.NewCodec()
 
 func init() {
+	log.SetOutput(os.Stdout)
 	ctypes.RegisterAmino(aminoCdc)
 }
 
@@ -77,7 +79,7 @@ func (app SantaApp) ListenNewBLock(isTest bool) {
 		if blockEvent.Block.Height%triggerInterval == 0 {
 			txHash, err := app.SendTx(blockEvent.Block.ChainID)
 			if err != nil {
-				log.Fatal("[Fail] to send tx", err)
+				log.Printf("[Fail] to send tx: %s", err.Error())
 			}
 
 			log.Printf("[Success] Height: %d,\tTxHash: %s\n", blockEvent.Block.Height, txHash)
