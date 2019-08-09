@@ -46,7 +46,7 @@ Wraith
 100&100 Venture Capital
 ```
 
-To kick off the process, the Goliath, Marine, Wraith and Ghost Validators have donated 21.6 million tokens to be distributed over the course of the next year, slightly above a 10% annualized return on currently staked tokens. You can see Santa hard at work here: https://finder.terra.money/columbus-2/account/terra13u66u4knssnws7n7w0n38mzyyqak5ygp807gyl
+To kick off the process, the Goliath, Marine, Wraith and Ghost Validators have donated 21.7 million tokens to be distributed over the course of the next year, slightly above a 10% annualized return on currently staked tokens. You can see Santa hard at work here: https://finder.terra.money/columbus-2/account/terra13u66u4knssnws7n7w0n38mzyyqak5ygp807gyl
 
 Some details on future operations: 
 - **IMPORTANT**: Santa will operate independently of existing rewards from fees and swaps. As Terra transaction volume goes up, expected rewards may well be significantly higher than that provided by Santa.  
