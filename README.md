@@ -43,6 +43,7 @@ RockX
 StakeWith.Us
 Terraforming
 Wraith
+100&100 Venture Capital
 ```
 
 To kick off the process, the Goliath, Marine, Wraith and Ghost Validators have donated 21.6 million tokens to be distributed over the course of the next year, slightly above a 10% annualized return on currently staked tokens. You can see Santa hard at work here: https://finder.terra.money/columbus-2/account/terra13u66u4knssnws7n7w0n38mzyyqak5ygp807gyl
