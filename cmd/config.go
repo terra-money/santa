@@ -28,8 +28,11 @@ var configCmd = &cobra.Command{
 			TriggerInterval: "5",
 			FeeAmount:       "1000000uluna",
 
-			WebHookURL:     "",
-			WebHookDataKey: "text",
+			FailWebHookURL:     "",
+			FailWebHookDataKey: "text",
+
+			SuccessWebHookURL:     "",
+			SuccessWebHookDataKey: "text",
 		}
 
 		if _, err := os.Stat(g.KeyDir); os.IsNotExist(err) {
