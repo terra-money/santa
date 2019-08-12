@@ -16,6 +16,8 @@ import (
 	ctypes "github.com/tendermint/tendermint/rpc/core/types"
 	rpc "github.com/tendermint/tendermint/rpc/lib/types"
 	abci "github.com/tendermint/tendermint/types"
+
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 var aminoCdc = amino.NewCodec()
@@ -83,30 +85,57 @@ func (app SantaApp) ListenNewBLock(isTest bool) {
 			txHash, err := app.SendTx(blockEvent.Block.ChainID)
 			if err != nil {
 				log.Printf("[Fail] to send tx: %s", err.Error())
-
-				if app.WebHookURL != "" && app.WebHookDataKey != "" {
-					notiBody, err := json.Marshal(map[string]string{
-						app.WebHookDataKey: fmt.Sprintf("[Fail] sending tx: %s", err.Error()),
-					})
-
-					if err != nil {
-						continue
-					}
-
-					// send notification to slack
-					http.Post(app.WebHookURL, "application/json", bytes.NewBuffer(notiBody))
-					continue
-				}
-
+				app.sendFailMessage(err.Error())
+				continue
 			}
 
 			log.Printf("[Success] Height: %d,\tTxHash: %s\n", blockEvent.Block.Height, txHash)
+			app.sendSuccessMessage(blockEvent.Block.Height)
 		}
 
 		if isTest {
 			break
 		}
 	}
+}
+
+func (app SantaApp) sendFailMessage(msg string) (err error) {
+	if app.FailWebHookURL != "" && app.FailWebHookDataKey != "" {
+		notiBody, _ := json.Marshal(map[string]string{
+			app.FailWebHookDataKey: fmt.Sprintf("[Fail] sending tx: %s", msg),
+		})
+
+		// send notification to slack
+		_, err = http.Post(app.FailWebHookURL, "application/json", bytes.NewBuffer(notiBody))
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (app SantaApp) sendSuccessMessage(height int64) (err error) {
+	if app.SuccessWebHookURL != "" && app.SuccessWebHookDataKey != "" {
+		feeCoin, err := sdk.ParseCoin(app.FeeAmount)
+		if err != nil {
+			return err
+		}
+
+		amount := sdk.NewDecFromIntWithPrec(feeCoin.Amount, 6).String()
+		denom := strings.ToUpper(strings.TrimLeft(feeCoin.Denom, "u"))
+		notiBody, _ := json.Marshal(map[string]string{
+			app.SuccessWebHookDataKey: fmt.Sprintf("Hohoho! Santa just gave out %s %s to stakeholders in presents in block %d", amount, denom, height),
+		})
+
+		// send notification to slack
+		_, err = http.Post(app.SuccessWebHookURL, "application/json", bytes.NewBuffer(notiBody))
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 // no-lint
