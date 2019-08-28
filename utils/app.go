@@ -8,7 +8,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth"
-	txbldr "github.com/cosmos/cosmos-sdk/x/auth/client/txbuilder"
+	txbldr "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/cosmos/cosmos-sdk/x/bank"
 
 	core "github.com/terra-project/core/app"
@@ -86,7 +86,7 @@ func (app SantaApp) SendTx(chainID string) (txHash string, err error) {
 	sendCoins := sdk.NewCoins(sdk.NewCoin(targetFeeDenom, sendAmount))
 	feeCoins := sdk.NewCoins(targetFeeCoin)
 	stdTx := auth.NewStdTx(
-		[]sdk.Msg{bank.NewMsgSend(acc.GetAddress(), acc.GetAddress(), sendCoins)},
+		[]sdk.Msg{bank.MsgSend{acc.GetAddress(), acc.GetAddress(), sendCoins}},
 		auth.NewStdFee(100000, feeCoins),
 		[]auth.StdSignature{},
 		"",
