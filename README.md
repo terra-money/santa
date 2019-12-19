@@ -39,4 +39,4 @@ We are excited to support Terra as it continues to expand beyond Korea and into 
 Terra Validators,
 
 - Certus One
-- 
+- Staking Fund
