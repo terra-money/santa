@@ -40,3 +40,4 @@ Terra Validators,
 
 - Certus One
 - Staking Fund
+- Dokia Capital
