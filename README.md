@@ -42,3 +42,4 @@ Terra Validators,
 - Staking Fund
 - Dokia Capital
 - Chorus One
+- StakeWith.Us
