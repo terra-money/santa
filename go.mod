@@ -13,6 +13,6 @@ require (
 	github.com/stretchr/testify v1.4.0
 	github.com/tendermint/go-amino v0.15.0
 	github.com/tendermint/tendermint v0.32.7
-	github.com/terra-project/core v0.3.0-rc0
+	github.com/terra-project/core v0.3.1
 	gopkg.in/yaml.v2 v2.2.2
 )
