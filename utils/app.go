@@ -93,6 +93,9 @@ func (app SantaApp) SendTx(chainID string) (txHash string, err error) {
 	)
 
 	signedTx, err := app.signTx(stdTx, acc, chainID)
+	if err != nil {
+		return
+	}
 
 	txHash, err = app.BroadcastTx(signedTx)
 	return
